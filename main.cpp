@@ -1,7 +1,5 @@
 #include <iostream>
 #include <wx-3.2/wx/wx.h>
-#include <GL/glew.h>
-#include <GLFW/glfw3.h>
 #include <wx-3.2/wx/glcanvas.h>
 #include <cstdlib>
 #include <ctime>
@@ -36,7 +34,6 @@ public:
 
 private:
     wxGLContext *m_context;
-    bool m_glewInitialized;
     float m_triangleColor[3];
 };
 
@@ -91,27 +88,11 @@ void MyFrame::OnChangeColor(wxCommandEvent &event)
 
 MyGLCanvas::MyGLCanvas(wxFrame *parent)
     : wxGLCanvas(parent, wxID_ANY, nullptr, wxDefaultPosition, wxDefaultSize, wxFULL_REPAINT_ON_RESIZE),
-      m_context(new wxGLContext(this)), m_glewInitialized(false)
+      m_context(new wxGLContext(this))
 {
     Connect(wxEVT_PAINT, wxPaintEventHandler(MyGLCanvas::OnPaint));
-    Connect(wxEVT_SHOW, wxShowEventHandler(MyGLCanvas::OnShow));
     NewTriangle();
     ChangeColor();
-}
-
-void MyGLCanvas::OnShow(wxShowEvent &event)
-{
-    if (!m_glewInitialized)
-    {
-        SetCurrent(*m_context);
-        if (glewInit() != GLEW_OK)
-        {
-            std::cerr << "Failed to initialize GLEW\n";
-            exit(EXIT_FAILURE);
-        }
-        m_glewInitialized = true;
-    }
-    event.Skip();
 }
 
 void MyGLCanvas::OnPaint(wxPaintEvent &event)
