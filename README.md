@@ -1,6 +1,6 @@
 # wxWidgets OpenGL Boilerplate
 
-This repository contains a simple boilerplate code for a C++ application that uses wxWidgets, OpenGL, GLFW, and GLEW. The application demonstrates how to set up an OpenGL context using wxWidgets, render a triangle, and change its color.
+This repository contains a simple boilerplate code for a C++ application that uses wxWidgets and OpenGL. The application demonstrates how to set up an OpenGL context using wxWidgets, render a triangle, and change its color.
 
 ## Prerequisites
 
@@ -9,8 +9,6 @@ To build and run the code, you'll need the following:
 - A C++ compiler with support for C++11 or later
 - wxWidgets library (>= 3.0)
 - OpenGL library
-- GLEW library
-- GLFW library
 
 ## Building the Application
 
